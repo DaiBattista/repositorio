@@ -1,0 +1,63 @@
+body{
+    overflow-x: hidden;
+ }
+
+ .thumbnail { 
+    position: relative; 
+   } 
+   .caption { 
+    position: absolute; 
+    top: 30%; 
+    left: 57%; 
+    width: 40%;
+    color: white;
+    text-align: right; }
+
+   .general {
+    width: 100%;
+   }
+   .texto {
+    text-align: center;
+   }
+   .texto1 {
+    margin-top: 0.5%;
+   }
+   .botones {
+    padding: auto;
+    margin-bottom: 3%;
+   }
+   .informacion {
+    width: 100%;
+    margin-top: 2%;
+    padding: 0.5%;
+    color: white;
+   }
+   .bajada {
+    font-weight: normal;
+    font-size: 1.2em;
+    margin-bottom: 2%;
+   }
+.formulario{
+    width: 50%;
+}
+.navegacion{
+    width: 100%;
+    display: block;
+}
+   /* Smartphones (portrait & landscape) 
+#Dispositivo = Mayoría de teléfonos móviles (vertical y horizontal) 
+#Resolución = B/w 320px to 479px */
+
+@media only screen and (min-device-width : 320px) and (max-device-width : 780px){
+    h1{font-size: 0.9em; }
+    p{font-size: 0.6em;}
+     .caption { 
+        position: absolute;
+        top: 4%;
+        left: 0.1%;
+        width: 80%;
+        color: white;
+        text-align: right;
+       }
+       
+}
