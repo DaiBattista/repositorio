@@ -8,10 +8,9 @@ const botonResumen= document.getElementById('resumen');
 const botonBorrar= document.getElementById('borrar');
 const total= document.getElementById('total');
 
+
 form.addEventListener('submit', e => {
 	e.preventDefault();
-    botonResumen.removeEventListener ('click', totalPagar);
-    
 });
 
 botonResumen.addEventListener('click', totalPagar, (Event) =>{
@@ -24,45 +23,49 @@ function checkInputs() {
 	const apellidoValue = apellido.value.trim();
 	const correoValue = correo.value.trim();
     const cantidadValue = cantidad.value.trim();
+
     var valido = true;
 
 if(nombreValue === '') {
         setErrorFor(nombre, 'El nombre no puede quedar en blanco.');
-        valido=false;
+        valido = false;
+
 } else {
         setSuccessFor(nombre);
 }
 
 if(apellidoValue === '') {
     setErrorFor(apellido, 'El apellido no puede quedar en blanco.');
-    valido=false;
+        valido = false;
+
 } else {
     setSuccessFor(apellido);
 }
 
 if(correoValue === '') {
         setErrorFor(correo, 'El mail no puede quedar en blanco.');
-        valido=false;
+        valido = false;
+
     } else if (!isEmail(correoValue)) {
         setErrorFor(correo, 'No ingresaste un mail válido.');
-        valido=false;
+        valido = false;
+
     } else {
         setSuccessFor(correo);
 }
 
 if(cantidadValue === '') {
     setErrorFor(cantidad, 'La cantidad no puede quedar en blanco.');
-    valido=false;
+    valido = false;
+
 } else if (!isNaN(cantidadValue)) {
     setSuccessFor(cantidad);
 } else {
     setErrorFor(cantidad, 'Sólo podes ingresar números.');
-    valido=false;
-}
-    return valido;
+    valido = false;
 
-}
-
+} return valido}
+ 
 function setErrorFor(input, message) {
     const formValidacion = input.parentElement;
     const small = formValidacion.querySelector('small');
@@ -86,7 +89,7 @@ let descuentoTrainee= 0.5;
 let descuentoJunior= 0.15;
 
 function totalPagar(){
-  if(checkInputs()) {
+if(checkInputs()) {
     let totalValor = (cantidad.value) * valorTicket;
     if(categoria.value == 1){
         totalValor = totalValor - (totalValor * descuentoEstudiante);
@@ -97,12 +100,11 @@ function totalPagar(){
     else if(categoria.value == 3){
         totalValor = totalValor - (totalValor * descuentoJunior);
     }
-    
     total.innerHTML = `Total a pagar: $ ${totalValor}`;
+    
 } else{
     total.innerHTML = `Total a pagar: $ ${0}`;
 }}
-
 
 botonBorrar.addEventListener('click', ()=>{
     total.innerHTML = `Total a pagar: $`;
