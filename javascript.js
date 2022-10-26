@@ -10,47 +10,57 @@ const total= document.getElementById('total');
 
 form.addEventListener('submit', e => {
 	e.preventDefault();
-	checkInputs();
-
-    botonResumen.addEventListener('click', totalPagar, (Event) =>{
-        Event.preventDefault();
-    }
-    );
+    botonResumen.removeEventListener ('click', totalPagar);
+    
 });
+
+botonResumen.addEventListener('click', totalPagar, (Event) =>{
+    Event.preventDefault();
+}
+);
 
 function checkInputs() {
 	const nombreValue = nombre.value.trim();
 	const apellidoValue = apellido.value.trim();
 	const correoValue = correo.value.trim();
     const cantidadValue = cantidad.value.trim();
+    var valido = true;
 
 if(nombreValue === '') {
         setErrorFor(nombre, 'El nombre no puede quedar en blanco.');
+        valido=false;
 } else {
         setSuccessFor(nombre);
 }
 
 if(apellidoValue === '') {
     setErrorFor(apellido, 'El apellido no puede quedar en blanco.');
+    valido=false;
 } else {
     setSuccessFor(apellido);
 }
 
 if(correoValue === '') {
         setErrorFor(correo, 'El mail no puede quedar en blanco.');
+        valido=false;
     } else if (!isEmail(correoValue)) {
         setErrorFor(correo, 'No ingresaste un mail válido.');
+        valido=false;
     } else {
         setSuccessFor(correo);
 }
 
 if(cantidadValue === '') {
     setErrorFor(cantidad, 'La cantidad no puede quedar en blanco.');
+    valido=false;
 } else if (!isNaN(cantidadValue)) {
     setSuccessFor(cantidad);
 } else {
     setErrorFor(cantidad, 'Sólo podes ingresar números.');
+    valido=false;
 }
+    return valido;
+
 }
 
 function setErrorFor(input, message) {
@@ -63,7 +73,6 @@ function setErrorFor(input, message) {
 function setSuccessFor(input, message){
     const formValidacion = input.parentElement;
     formValidacion.className = 'form-validacion success';
-
 }
 
 function isEmail(correo){
@@ -77,6 +86,7 @@ let descuentoTrainee= 0.5;
 let descuentoJunior= 0.15;
 
 function totalPagar(){
+  if(checkInputs()) {
     let totalValor = (cantidad.value) * valorTicket;
     if(categoria.value == 1){
         totalValor = totalValor - (totalValor * descuentoEstudiante);
@@ -89,8 +99,9 @@ function totalPagar(){
     }
     
     total.innerHTML = `Total a pagar: $ ${totalValor}`;
-}
-
+} else{
+    total.innerHTML = `Total a pagar: $ ${0}`;
+}}
 
 
 botonBorrar.addEventListener('click', ()=>{
